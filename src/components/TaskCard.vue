@@ -12,9 +12,24 @@ const props = defineProps({
     :subtitle="task.type"
     :prepend-icon="task.type === 'bug' ? 'mdi-bug' : 'mdi-shape-square-plus'"
     variant="tonal"
-    color="indigo-darken-3"
+    color="blue-darken-3"
     :append-icon="task.status === 'Done' ? 'mdi-check' : null"
+    hover
   >
     <VCardText>{{ task.description }}</VCardText>
+    <VDivider
+      thickness="1"
+      color="blue-darken-4"
+      class="border-opacity-100"
+    ></VDivider>
+
+    <VCardActions>
+      <VBtn prepend-icon="mdi-pencil" color="blue-darken-2" outlined>
+        Edit
+      </VBtn>
+      <VBtn prepend-icon="mdi-delete" color="blue-darken-2" outlined>
+        Delete
+      </VBtn>
+    </VCardActions>
   </VCard>
 </template>
