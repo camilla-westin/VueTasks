@@ -6,7 +6,7 @@ const tasks = ref(Tasks);
 </script>
 
 <template>
-  <div class="grid grid-cols-3">
+  <div class="grid grid-cols-3 gap-4">
     <VCard v-for="task in tasks" :key="task.id">
       <VCardTitle>{{ task.title }}</VCardTitle>
       <VCardText>{{ task.status }}</VCardText>
