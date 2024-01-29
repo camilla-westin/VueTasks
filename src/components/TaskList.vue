@@ -62,16 +62,21 @@ const editTask = (id) => {
   <div class="flex justify-end items-center mb-6">
     <VBtn @click="openDialog" prepend-icon="mdi-plus">Add task</VBtn>
   </div>
-
-  <ul class="grid grid-cols-3 gap-4">
-    <li v-for="task in tasks" :key="task.id">
-      <TaskCard
-        :task="task"
-        @delete-clicked="deleteTask"
-        @editClicked="editTask"
-      />
-    </li>
-  </ul>
+  <VRow class="grid grid-cols-3 gap-4">
+    <VCol>
+      <ul>
+        <li v-for="task in tasks" :key="task.id" class="mb-4">
+          <TaskCard
+            :task="task"
+            @delete-clicked="deleteTask"
+            @editClicked="editTask"
+          />
+        </li>
+      </ul>
+    </VCol>
+    <VCol></VCol>
+    <VCol></VCol>
+  </VRow>
 
   <EditTask
     :dialog-status="dialogStatus"

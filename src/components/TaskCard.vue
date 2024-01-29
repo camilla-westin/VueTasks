@@ -20,7 +20,7 @@ const editClicked = (id) => {
   <VCard
     :title="task.title"
     :subtitle="task.type"
-    :prepend-icon="task.type === 'bug' ? 'mdi-bug' : 'mdi-shape-square-plus'"
+    :prepend-icon="task.type === 'Bug' ? 'mdi-bug' : 'mdi-shape-square-plus'"
     variant="tonal"
     color="blue-darken-3"
     :append-icon="task.status === 'Done' ? 'mdi-check' : null"
