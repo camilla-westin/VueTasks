@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Fix navigation bug",
+    "description": "Description for item 1",
+    "type": "bug",
+    "priority": 1,
+    "status": "To do"
+  },
+  {
+    "id": 2,
+    "title": "Make header responsive",
+    "description": "Description for item 2",
+    "type": "feature",
+    "priority": 2,
+    "status": "In progress"
+  },
+  {
+    "id": 3,
+    "title": "Footer shows 404",
+    "description": "Description for item 3",
+    "type": "bug",
+    "priority": 3,
+    "status": "Done"
+  },
+  {
+    "id": 4,
+    "title": "Create new page",
+    "description": "Description for item 4",
+    "type": "feature",
+    "priority": 1,
+    "status": "To do"
+  },
+  {
+    "id": 5,
+    "title": "Wrong data in page 2",
+    "description": "Description for item 5",
+    "type": "bug",
+    "priority": 2,
+    "status": "In progress"
+  },
+  {
+    "id": 6,
+    "title": "New block for contact page",
+    "description": "Description for item 6",
+    "type": "feature",
+    "priority": 3,
+    "status": "Done"
+  },
+  {
+    "id": 7,
+    "title": "Contact shows wrong email",
+    "description": "Description for item 7",
+    "type": "bug",
+    "priority": 1,
+    "status": "To do"
+  },
+  {
+    "id": 8,
+    "title": "Add skip to content",
+    "description": "Description for item 8",
+    "type": "feature",
+    "priority": 2,
+    "status": "In progress"
+  },
+  {
+    "id": 9,
+    "title": "Modal not working",
+    "description": "Description for item 9",
+    "type": "bug",
+    "priority": 3,
+    "status": "Done"
+  },
+  {
+    "id": 10,
+    "title": "Add to cart animation",
+    "description": "Description for item 10",
+    "type": "feature",
+    "priority": 1,
+    "status": "To do"
+  }
+]

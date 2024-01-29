@@ -1,5 +1,12 @@
-<script setup></script>
+<script setup>
+import TaskList from "@/components/TaskList.vue";
+</script>
 
 <template>
-  <main></main>
+  <main>
+    <VContainer>
+      <h1>VueTasks</h1>
+      <TaskList />
+    </VContainer>
+  </main>
 </template>
