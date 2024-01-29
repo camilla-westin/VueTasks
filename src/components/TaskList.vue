@@ -18,6 +18,14 @@ const openDialog = () => {
 const closeDialog = () => {
   dialogStatus.value = false;
 };
+
+const submitTask = (taskData) => {
+  tasks.value.push({
+    id: Math.floor(Math.random() * 1000000),
+    ...taskData,
+  });
+  closeDialog();
+};
 </script>
 
 <template>
@@ -31,5 +39,9 @@ const closeDialog = () => {
     </li>
   </ul>
 
-  <EditTask :dialog-status="dialogStatus" @update:dialog-status="closeDialog" />
+  <EditTask
+    :dialog-status="dialogStatus"
+    @update:dialog-status="closeDialog"
+    @on-saved="submitTask"
+  />
 </template>

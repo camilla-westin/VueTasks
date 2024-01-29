@@ -8,8 +8,26 @@ const props = defineProps({
 });
 
 const dialog = ref(false);
+const taskTitle = ref("");
+const taskDescription = ref("");
+const taskStatus = ref("");
+const taskType = ref("");
 
-const emit = defineEmits(["update:dialogStatus"]);
+const emit = defineEmits(["update:dialogStatus", "onSaved"]);
+
+const onSave = () => {
+  const taskData = {
+    title: taskTitle.value,
+    description: taskDescription.value,
+    status: taskStatus.value,
+    type: taskType.value,
+  };
+
+  emit("onSaved", taskData);
+
+  dialog.value = false;
+  emit("update:dialogStatus", false);
+};
 
 watch(
   () => props.dialogStatus,
@@ -39,13 +57,21 @@ const closeDialog = () => {
           <VContainer>
             <VRow>
               <VCol cols="12">
-                <v-text-field label="Task name" required></v-text-field>
+                <v-text-field
+                  v-model="taskTitle"
+                  label="Title"
+                  required
+                ></v-text-field>
               </VCol>
               <VCol cols="12">
-                <v-textarea label="Description"></v-textarea>
+                <v-textarea
+                  v-model="taskDescription"
+                  label="Description"
+                ></v-textarea>
               </VCol>
               <VCol cols="12" sm="6">
                 <v-select
+                  v-model="taskStatus"
                   :items="['To do', 'In Progress', 'Done']"
                   label="Progress"
                   required
@@ -53,6 +79,7 @@ const closeDialog = () => {
               </VCol>
               <VCol cols="12" sm="6">
                 <v-select
+                  v-model="taskType"
                   :items="['Bug', 'Feature']"
                   label="Type"
                   required
@@ -63,12 +90,10 @@ const closeDialog = () => {
         </VCardText>
         <VCardActions>
           <v-spacer></v-spacer>
-          <v-btn color="blue-darken-1" variant="text" @click="closeDialog">
-            Close
-          </v-btn>
-          <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
-            Save
-          </v-btn>
+          <VBtn color="blue-darken-1" variant="text" @click="closeDialog"
+            >Close</VBtn
+          >
+          <VBtn color="blue-darken-1" variant="text" @click="onSave">Save</VBtn>
         </VCardActions>
       </VCard>
     </VDialog>
