@@ -6,6 +6,7 @@ import EditTask from "./EditTask.vue";
 
 const tasks = ref(Tasks);
 const dialogStatus = ref(false);
+const editTaskData = ref(null);
 
 const deleteTask = (id) => {
   tasks.value = tasks.value.filter((task) => task.id !== id);
@@ -20,11 +21,40 @@ const closeDialog = () => {
 };
 
 const submitTask = (taskData) => {
-  tasks.value.push({
-    id: Math.floor(Math.random() * 1000000),
-    ...taskData,
-  });
+  const taskExists = tasks.value.find((task) => task.id === taskData.id);
+
+  if (taskExists) {
+    tasks.value = tasks.value.map((task) => {
+      if (task.id === taskData.id) {
+        return {
+          ...task,
+          ...taskData,
+        };
+      }
+      return task;
+    });
+  } else {
+    tasks.value.push({
+      id: Math.floor(Math.random() * 1000000),
+      ...taskData,
+    });
+  }
+
   closeDialog();
+};
+
+const editTask = (id) => {
+  const currentTask = tasks.value.find((task) => task.id === id);
+
+  editTaskData.value = {
+    id: currentTask.id,
+    title: currentTask.title,
+    description: currentTask.description,
+    status: currentTask.status,
+    type: currentTask.type,
+  };
+
+  openDialog();
 };
 </script>
 
@@ -35,12 +65,17 @@ const submitTask = (taskData) => {
 
   <ul class="grid grid-cols-3 gap-4">
     <li v-for="task in tasks" :key="task.id">
-      <TaskCard :task="task" @delete-clicked="deleteTask" />
+      <TaskCard
+        :task="task"
+        @delete-clicked="deleteTask"
+        @editClicked="editTask"
+      />
     </li>
   </ul>
 
   <EditTask
     :dialog-status="dialogStatus"
+    :edit-task-data="editTaskData"
     @update:dialog-status="closeDialog"
     @on-saved="submitTask"
   />

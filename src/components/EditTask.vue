@@ -5,6 +5,9 @@ const props = defineProps({
   dialogStatus: {
     type: Boolean,
   },
+  editTaskData: {
+    type: Object,
+  },
 });
 
 const dialog = ref(false);
@@ -17,6 +20,9 @@ const emit = defineEmits(["update:dialogStatus", "onSaved"]);
 
 const onSave = () => {
   const taskData = {
+    id: props.editTaskData
+      ? props.editTaskData.id
+      : Math.floor(Math.random() * 1000000),
     title: taskTitle.value,
     description: taskDescription.value,
     status: taskStatus.value,
@@ -27,7 +33,34 @@ const onSave = () => {
 
   dialog.value = false;
   emit("update:dialogStatus", false);
+
+  clearForm();
 };
+
+const clearForm = () => {
+  taskTitle.value = "";
+  taskDescription.value = "";
+  taskStatus.value = "";
+  taskType.value = "";
+};
+
+watch(
+  () => props.editTaskData,
+  (newValue) => {
+    if (newValue) {
+      taskTitle.value = newValue.title || "";
+      taskDescription.value = newValue.description || "";
+      taskStatus.value = newValue.status || "";
+      taskType.value = newValue.type || "";
+    } else {
+      taskTitle.value = "";
+      taskDescription.value = "";
+      taskStatus.value = "";
+      taskType.value = "";
+    }
+  },
+  { immediate: true }
+);
 
 watch(
   () => props.dialogStatus,
@@ -42,7 +75,9 @@ watch(
 
 const closeDialog = () => {
   dialog.value = false;
+
   emit("update:dialogStatus", false);
+  clearForm();
 };
 </script>
 

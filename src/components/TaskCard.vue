@@ -6,10 +6,14 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["deleteClicked"]);
+const emit = defineEmits(["deleteClicked", "editClicked"]);
 
 const deleteClicked = (id) => {
   emit("deleteClicked", id);
+};
+
+const editClicked = (id) => {
+  emit("editClicked", id);
 };
 </script>
 <template>
@@ -30,7 +34,12 @@ const deleteClicked = (id) => {
     ></VDivider>
 
     <VCardActions>
-      <VBtn prepend-icon="mdi-pencil" color="blue-darken-2" outlined>
+      <VBtn
+        @click="editClicked(task.id)"
+        prepend-icon="mdi-pencil"
+        color="blue-darken-2"
+        outlined
+      >
         Edit
       </VBtn>
       <VBtn
