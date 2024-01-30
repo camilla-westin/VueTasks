@@ -63,9 +63,15 @@ const editTask = (id) => {
     <VBtn @click="openDialog" prepend-icon="mdi-plus">Add task</VBtn>
   </div>
   <VRow class="grid grid-cols-3 gap-4">
-    <VCol>
+    <VCol class="p-4 border border-gray-600 rounded shadow-lg">
+      <h2 class="font-medium text-md mb-4 uppercase">To do</h2>
+
       <ul>
-        <li v-for="task in tasks" :key="task.id" class="mb-4">
+        <li
+          v-for="task in tasks.filter((task) => task.status === 'To do')"
+          :key="task.id"
+          class="mb-4"
+        >
           <TaskCard
             :task="task"
             @delete-clicked="deleteTask"
@@ -74,8 +80,40 @@ const editTask = (id) => {
         </li>
       </ul>
     </VCol>
-    <VCol></VCol>
-    <VCol></VCol>
+    <VCol class="p-4 border border-gray-600 rounded shadow-lg">
+      <h2 class="font-medium text-md mb-4 uppercase">In Progress</h2>
+      <VDivider></VDivider>
+      <ul>
+        <li
+          v-for="task in tasks.filter((task) => task.status === 'In progress')"
+          :key="task.id"
+          class="mb-4"
+        >
+          <TaskCard
+            :task="task"
+            @delete-clicked="deleteTask"
+            @editClicked="editTask"
+          />
+        </li>
+      </ul>
+    </VCol>
+    <VCol class="p-4 border border-gray-600 rounded shadow-lg">
+      <h2 class="font-medium text-md mb-4 uppercase">Done</h2>
+
+      <ul>
+        <li
+          v-for="task in tasks.filter((task) => task.status === 'Done')"
+          :key="task.id"
+          class="mb-4"
+        >
+          <TaskCard
+            :task="task"
+            @delete-clicked="deleteTask"
+            @editClicked="editTask"
+          />
+        </li>
+      </ul>
+    </VCol>
   </VRow>
 
   <EditTask
